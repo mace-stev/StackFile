@@ -1,0 +1,428 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>StackFiles • (Div Soup Edition)</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0e1623;
+      color: #d9e1ee;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial
+    }
+
+    ._r0-Root {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh
+    }
+
+    ._r0-Sidebar {
+      background: #0a121c;
+      border-right: 1px solid #172233
+    }
+
+    ._r0-SidebarInner {
+      padding: 18px
+    }
+
+    ._r0-Brand {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px
+    }
+
+    ._r0-Logo {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: conic-gradient(from 180deg, #facc15, #34d399, #60a5fa, #f472b6, #facc15)
+    }
+
+    ._r0-NavItem {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 9px 10px;
+      color: #d9e1ee;
+      border-radius: 10px;
+      cursor: pointer
+    }
+
+    ._r0-NavItem:hover {
+      background: #132133
+    }
+
+    ._r0-Main {
+      padding: 22px
+    }
+
+    ._r0-Toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px
+    }
+
+    ._r0-Title {
+      display: flex;
+      gap: 10px;
+      align-items: center
+    }
+
+    ._r0-Heading {
+      font-weight: 700
+    }
+
+    ._r0-NewButton {
+      background: #23c58f;
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: #06261a;
+      cursor: pointer;
+      font-weight: 700
+    }
+
+    ._tabs {
+      display: flex;
+      gap: 8px;
+      margin: 8px 0 12px
+    }
+
+    ._tab {
+      border: 1px solid #1a2638;
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: #0f1b28;
+      cursor: pointer
+    }
+
+    ._tab._active {
+      outline: 2px solid #23c58f;
+      outline-offset: 2px
+    }
+
+    ._tbl-Wrapper {
+      border: 1px solid #172233;
+      background: rgba(9, 18, 28, .6);
+      border-radius: 12px;
+      overflow: hidden
+    }
+
+    ._tbl-Header {
+      display: grid;
+      grid-template-columns: 1fr 240px 160px;
+      background: #0c1a27;
+      color: #8aa0be;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: .06em
+    }
+
+    ._tbl-Header>div {
+      padding: 12px 14px;
+      border-bottom: 1px solid #172233
+    }
+
+    ._tbl-Body {
+      position: relative
+    }
+
+    ._tbl-Row {
+      display: grid;
+      grid-template-columns: 1fr 240px 160px;
+      align-items: center
+    }
+
+    ._tbl-Cell {
+      padding: 14px;
+      border-bottom: 1px solid #172233
+    }
+
+    ._nameCell {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    ._fileIc {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: #1e2a3c
+    }
+
+    ._actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px
+    }
+
+    ._gh {
+      border: 1px solid #23324a;
+      border-radius: 10px;
+      padding: 8px 9px;
+      cursor: pointer;
+      color: #d9e1ee
+    }
+
+    ._tbl-Row:hover {
+      background: rgba(255, 255, 255, .02)
+    }
+
+    .styled__TableRows-sc-1dpgwmw-6._F0Ylf {
+      max-height: 60vh;
+      overflow: auto
+    }
+
+    ._sortBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border: 1px solid #1a2638;
+      border-radius: 8px;
+      background: #0f1b28;
+      cursor: pointer
+    }
+
+    ._sortBtn._on {
+      outline: 2px solid #23c58f;
+      outline-offset: 2px
+    }
+
+    .__arrow {
+      opacity: .7
+    }
+
+    ._dlg {
+      position: fixed;
+      inset: 0;
+      display: none
+    }
+
+    ._dlg._open {
+      display: block
+    }
+
+    ._dlgBk {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .5)
+    }
+
+    ._dlgCard {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: #0c1824;
+      border: 1px solid #172233;
+      border-radius: 12px;
+      width: min(520px, 92vw)
+    }
+
+    ._dlgHd {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 14px;
+      border-bottom: 1px solid #172233
+    }
+
+    ._dlgBd {
+      padding: 14px
+    }
+
+    ._inpName {
+      width: 100%;
+      margin-top: 6px;
+      background: #0b1720;
+      border: 1px solid #172233;
+      color: #d9e1ee;
+      padding: 8px 10px;
+      border-radius: 10px
+    }
+  </style>
+</head>
+
+<body>
+  <div class="_r0-Root">
+    <div class="_r0-Sidebar">
+      <div class="_r0-SidebarInner">
+        <div class="_r0-Brand">
+          <div class="_r0-Logo"></div>
+          <div>StackFiles</div>
+        </div>
+        <div class="_r0-NavItem">Files</div>
+        <div class="_r0-NavItem">Connections</div>
+        <div class="_r0-NavItem">Workspace</div>
+        <div class="_r0-NavItem">API Keys</div>
+        <div class="_r0-NavItem">Billing & Usage</div>
+        <div class="_r0-NavItem">Settings</div>
+      </div>
+    </div>
+
+    <div class="_r0-Main">
+      <div class="_r0-Toolbar">
+        <div class="_r0-Title">
+          <div class="_r0-Heading">Files</div>
+        </div>
+        <div class="_r0-NewButton _btnNew">+ New file</div>
+      </div>
+
+      <div class="_tabs">
+        <div class="_tab _active" data-tab="my">My Files</div>
+        <div class="_tab" data-tab="shared">Shared With Me</div>
+      </div>
+
+      <div class="_panels">
+        <div class="_panel" data-panel="my">
+          <div class="_tbl-Wrapper styled__TableRows-sc-1dpgwmw-6 _F0Ylf">
+            <div class="_tbl-Header">
+              <div class="_hdrName"><span>File Name</span>
+                <div class="_sortBtn" data-order="none">Sort <span class="__arrow">↕</span></div>
+              </div>
+              <div>Last Updated</div>
+              <div></div>
+            </div>
+            <div class="_tbl-Body" id="filesBody"></div>
+          </div>
+        </div>
+
+        <div class="_panel" data-panel="shared" style="display:none;color:#8aa0be">No shared files yet.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add File Dialog -->
+  <div class="_dlg" id="dlgAdd">
+    <div class="_dlgBk"></div>
+    <div class="_dlgCard">
+      <div class="_dlgHd">
+        <div>New file</div>
+        <div class="_gh _dlgClose">✕</div>
+      </div>
+      <div class="_dlgBd">
+        <label style="display:block;margin-bottom:6px">File name</label>
+        <input class="_inpName" placeholder="e.g. Apple" />
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+          <div class="_gh _dlgClose">Cancel</div>
+          <div class="_gh _addConfirm">Add</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Remove File Dialog -->
+  <div class="_dlg" id="dlgRemove">
+    <div class="_dlgBk"></div>
+    <div class="_dlgCard">
+      <div class="_dlgHd">
+        <div class="_dlgFileName"></div>
+        <div class="_gh _dlgClose">✕</div>
+      </div>
+      <div class="_dlgBd">
+
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+          <div class="_gh _dlgClose">Cancel</div>
+          <div class="_gh _dlgRemove">Remove</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dialog logic
+    const addBtn = document.querySelector('._btnNew');
+    const addDlg = document.getElementById('dlgAdd');
+    const filesBody = document.getElementById('filesBody');
+
+    addBtn?.addEventListener('click', () => {
+      addDlg.classList.add('_open');
+      setTimeout(() => document.querySelector('._inpName')?.focus(), 0);
+    });
+    document.addEventListener('click', e => {
+      if (e.target.closest('._dlgBk') || e.target.closest('._dlgClose')) {
+        addDlg.classList.remove('_open');
+      }
+    });
+    document.addEventListener('click', e => {
+      if (e.target.closest('._addConfirm')) {
+        const input = document.querySelector('._inpName');
+        const n = (input?.value || '').trim() || ('File-' + Math.floor(Math.random() * 1000));
+        const row = document.createElement('div');
+        row.className = '_tbl-Row styled__TableRowContainer-sc-1dpgwmw-7 _hQLeMo';
+        row.innerHTML = `
+          <div class="_tbl-Cell _nameCell"><span class="_fileIc"></span><div class="fileLink">${n}</div></div>
+          <div class="_tbl-Cell _dateCell">Oct 28, 2025</div>
+          <div class="_tbl-Cell _actions"><div class="_gh _actShare">Share</div><div class="_gh _actMore">⋯</div></div>`;
+        filesBody.appendChild(row);
+        addDlg.classList.remove('_open');
+        if (input) input.value = '';
+       
+    }});
+    const removeDialog = document.getElementById('dlgRemove');
+let rowPendingDelete = null;
+
+// open dialog from any ⋯ button
+document.addEventListener('click', (e) => {
+  const moreBtn = e.target.closest('._actMore');
+  if (!moreBtn) return;
+
+  rowPendingDelete = moreBtn.closest('._tbl-Row');
+  // optional: show file name
+  const name = rowPendingDelete?.querySelector('.fileLink')?.textContent?.trim() || '';
+  const title = removeDialog.querySelector('._dlgFileName');
+  if (title) title.textContent = `Remove “${name}”?`;
+
+
+  removeDialog.classList.add('_open');
+});
+
+// handle dialog actions (close/remove)
+removeDialog.addEventListener('click', (e) => {
+  if (e.target.closest('._dlgBk') || e.target.closest('._dlgClose')) {
+    removeDialog.classList.remove('_open');
+    rowPendingDelete = null;
+    return;
+  }
+  if (e.target.closest('._dlgRemove')) {
+    rowPendingDelete?.remove();
+    removeDialog.classList.remove('_open');
+    rowPendingDelete = null;
+  }
+});
+
+
+    // Sort logic
+    (function () {
+      const sortBtn = document.querySelector('._sortBtn');
+      if (!sortBtn) return;
+      function getRows() { return Array.from(filesBody.querySelectorAll('._tbl-Row')); }
+      function nameOf(row) { return (row.querySelector('.fileLink')?.textContent || '').trim().toLowerCase(); }
+      function applySort(order) {
+        const rows = getRows();
+        rows.sort((a, b) => {
+          const A = nameOf(a), B = nameOf(b);
+          if (A === B) return 0;
+          return order === 'asc' ? (A < B ? -1 : 1) : (A > B ? -1 : 1);
+        });
+        rows.forEach(r => filesBody.appendChild(r));
+      }
+      sortBtn.addEventListener('click', () => {
+        const cur = sortBtn.getAttribute('data-order');
+        let next = 'asc';
+        if (cur === 'asc') next = 'desc'; else if (cur === 'desc') next = 'none';
+        sortBtn.setAttribute('data-order', next);
+        sortBtn.classList.toggle('_on', next !== 'none');
+        sortBtn.querySelector('.__arrow').textContent = next === 'asc' ? '↑' : next === 'desc' ? '↓' : '↕';
+        if (next === 'none') return;
+        applySort(next);
+      });
+    })();
+  </script>
+</body>
+
+</html>
