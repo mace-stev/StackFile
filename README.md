@@ -2,6 +2,9 @@
 
 ![Playwright Tests](https://github.com/mace-stev/StackFile/actions/workflows/playwright.yml/badge.svg)
 
+**Latest CI Runs & Downloadable Test Reports:**  
+https://github.com/mace-stev/StackFile/actions
+
 End-to-end UI automation demo built with **Playwright** to validate real user behavior on a web application with intentionally complex structure.
 
 This project demonstrates reliable locator strategy, cross-browser testing, HTML reporting, and CI execution suitable for real client environments.
